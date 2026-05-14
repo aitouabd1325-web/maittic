@@ -1,75 +1,93 @@
+import { Link } from 'react-router-dom';
+import { Zap, Mail, ExternalLink } from 'lucide-react';
+import { categories } from '../data/products';
+
 export default function Footer() {
   return (
-    <footer className="bg-[#050c1a] border-t border-[#1f2937]">
+    <footer className="bg-gray-900 text-white mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 mb-10">
           {/* Brand */}
-          <div className="md:col-span-2">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#00c96f] to-[#00a855] flex items-center justify-center shadow-lg shadow-[#00c96f]/30">
-                <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                </svg>
+          <div className="col-span-2 sm:col-span-1">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-9 h-9 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center">
+                <Zap className="w-5 h-5 text-white" />
               </div>
               <div>
-                <span className="text-white font-black text-2xl">Mait<span className="text-[#00c96f]">Tic</span></span>
-                <p className="text-[#6b7a8d] text-xs uppercase tracking-widest">Comparateur de Prix Maroc 🇲🇦</p>
+                <span className="text-xl font-black">Maittic</span>
+                <p className="text-xs text-emerald-400 leading-none">Maroc Prix</p>
               </div>
             </div>
-            <p className="text-[#6b7a8d] text-sm leading-relaxed max-w-sm">
-              Le premier comparateur de prix dédié aux smartphones et laptops au Maroc. Trouvez le meilleur deal sur Jumia, Marjane, MediaMarkt et plus encore.
+            <p className="text-sm text-gray-400 leading-relaxed">
+              Le comparateur de prix #1 au Maroc. Trouvez les meilleures offres sur Jumia, Marjane, Electroplanet, Avito, Hmall et Fnac Maroc.
             </p>
-            <div className="flex gap-3 mt-5">
-              {["Twitter / X", "GitHub", "LinkedIn"].map((s) => (
-                <a
-                  key={s}
-                  href="#"
-                  className="bg-[#0d1a2d] border border-[#1f2937] hover:border-[#00c96f]/40 text-[#6b7a8d] hover:text-white px-3 py-1.5 rounded-lg text-xs font-medium transition-all"
-                >
-                  {s}
-                </a>
-              ))}
+            <div className="flex items-center gap-2 mt-4 text-sm text-gray-400">
+              <Mail className="w-4 h-4" />
+              <span>contact@maittic.ma</span>
             </div>
           </div>
 
-          {/* Links */}
+          {/* Categories */}
           <div>
-            <p className="text-white text-sm font-bold mb-4">Catégories</p>
-            <div className="space-y-2.5">
-              {["Smartphones", "Laptops", "Tablettes (bientôt)", "Accessoires (bientôt)", "Meilleures offres"].map((l) => (
-                <a key={l} href="#" className="block text-[#6b7a8d] hover:text-[#00c96f] text-sm transition-colors">
-                  {l}
-                </a>
+            <h3 className="font-bold text-white mb-4 text-sm uppercase tracking-wide">Categories</h3>
+            <ul className="space-y-2.5">
+              {categories.map(cat => (
+                <li key={cat.id}>
+                  <Link to={`/category/${cat.id}`} className="text-sm text-gray-400 hover:text-emerald-400 transition-colors flex items-center gap-2">
+                    <span>{cat.emoji}</span> {cat.label}
+                  </Link>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
 
+          {/* Boutiques */}
           <div>
-            <p className="text-white text-sm font-bold mb-4">Boutiques</p>
-            <div className="space-y-2.5">
-              {["Jumia.ma", "Marjane.ma", "MediaMarkt Maroc", "Electro Plus", "Zayou"].map((l) => (
-                <a key={l} href="#" className="block text-[#6b7a8d] hover:text-[#00c96f] text-sm transition-colors">
-                  {l}
-                </a>
+            <h3 className="font-bold text-white mb-4 text-sm uppercase tracking-wide">Boutiques</h3>
+            <ul className="space-y-2.5">
+              {[
+                { name: 'Jumia Maroc', url: 'https://www.jumia.ma' },
+                { name: 'Marjane', url: 'https://www.marjane.ma' },
+                { name: 'Electroplanet', url: 'https://www.electroplanet.ma' },
+                { name: 'Avito', url: 'https://www.avito.ma' },
+                { name: 'Hmall', url: 'https://www.hmall.ma' },
+                { name: 'Fnac Maroc', url: 'https://www.fnac.ma' },
+              ].map(store => (
+                <li key={store.name}>
+                  <a href={store.url} target="_blank" rel="noopener noreferrer" className="text-sm text-gray-400 hover:text-emerald-400 transition-colors flex items-center gap-1.5">
+                    {store.name} <ExternalLink className="w-3 h-3 opacity-50" />
+                  </a>
+                </li>
               ))}
-            </div>
+            </ul>
+          </div>
+
+          {/* Quick links */}
+          <div>
+            <h3 className="font-bold text-white mb-4 text-sm uppercase tracking-wide">Liens utiles</h3>
+            <ul className="space-y-2.5">
+              <li><Link to="/deals" className="text-sm text-gray-400 hover:text-emerald-400 transition-colors">Deals du Jour</Link></li>
+              <li><Link to="/compare" className="text-sm text-gray-400 hover:text-emerald-400 transition-colors">Comparer des produits</Link></li>
+              <li><Link to="/wishlist" className="text-sm text-gray-400 hover:text-emerald-400 transition-colors">Ma Wishlist</Link></li>
+              <li><Link to="/alerts" className="text-sm text-gray-400 hover:text-emerald-400 transition-colors">Alertes Prix</Link></li>
+            </ul>
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="border-t border-[#1f2937] pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-[#4b5563] text-xs">
-            © 2025 MaitTic. Projet open source · Scraping éthique · Données à titre indicatif.
+        {/* Bottom */}
+        <div className="border-t border-gray-800 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-gray-500">
+            &copy; 2025 Maittic — Comparateur de prix au Maroc. Tous droits reserves.
           </p>
           <div className="flex items-center gap-4">
-            <span className="text-[#4b5563] text-xs">Construit avec</span>
-            {["Python", "React", "SQLite", "BeautifulSoup"].map((t) => (
-              <span key={t} className="text-[#6b7a8d] text-xs bg-[#0d1a2d] border border-[#1f2937] px-2 py-0.5 rounded-md">
-                {t}
-              </span>
-            ))}
+            <span className="text-xs text-gray-500">Les prix sont mis à jour regulierement et peuvent varier.</span>
           </div>
         </div>
+
+        {/* Affiliate disclosure */}
+        <p className="text-xs text-gray-600 mt-3 text-center">
+          Certains liens sont des liens affilies. Maittic peut recevoir une commission si vous effectuez un achat via ces liens, sans cout supplementaire pour vous.
+        </p>
       </div>
     </footer>
   );

@@ -1,65 +1,68 @@
 @import "tailwindcss";
 
-* {
-  box-sizing: border-box;
+/* Dark mode support */
+:root {
+  color-scheme: light dark;
 }
 
-body {
-  font-family: 'Inter', system-ui, sans-serif;
-  background-color: #050c1a;
-  color: white;
+/* Scrollbar hide utility */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
 }
 
-::-webkit-scrollbar-track {
-  background: #0a0f1e;
+/* Image lazy loading blur effect */
+img[loading="lazy"] {
+  transition: opacity 0.3s;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #1f2937;
-  border-radius: 3px;
+/* Line clamp utility */
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
-
-::-webkit-scrollbar-thumb:hover {
-  background: #374151;
-}
-
-input[type="range"] {
-  -webkit-appearance: none;
-  appearance: none;
-  height: 4px;
-  border-radius: 2px;
-  background: #1f2937;
-  outline: none;
-}
-
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: #00c96f;
-  cursor: pointer;
-  box-shadow: 0 0 8px rgba(0, 201, 111, 0.5);
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
-}
-
-.animate-pulse {
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+/* Dark mode body */
+.dark body {
+  background-color: #030712;
+  color: #f9fafb;
+}
+
+/* Focus styles */
+:focus-visible {
+  outline: 2px solid #10b981;
+  outline-offset: 2px;
+}
+
+/* Selection color */
+::selection {
+  background-color: #10b98140;
+  color: #065f46;
+}
+
+/* Recharts dark mode */
+.dark .recharts-cartesian-grid-horizontal line,
+.dark .recharts-cartesian-grid-vertical line {
+  stroke: #374151;
+}
+.dark .recharts-tooltip-wrapper .recharts-default-tooltip {
+  background: #1f2937 !important;
+  border-color: #374151 !important;
+  color: #f9fafb !important;
 }

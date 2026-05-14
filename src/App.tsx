@@ -1,3 +1,4 @@
+import AdminChat from './admin/AdminChat';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AppProvider } from './context/AppContext';
 import Header from './components/Header';
@@ -27,6 +28,7 @@ export default function App() {
       <AppProvider>
         <Layout>
           <Routes>
+            <Route path="/admin-chat" element={<AdminChat />} />
             <Route path="/" element={<HomePage />} />
             <Route path="/product/:id" element={<ProductPage />} />
             <Route path="/category/:id" element={<CategoryPage />} />
@@ -50,3 +52,4 @@ export default function App() {
     </BrowserRouter>
   );
 }
+
